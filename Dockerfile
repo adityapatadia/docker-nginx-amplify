@@ -2,7 +2,8 @@ FROM nginx:1.14
 MAINTAINER NGINX Amplify Engineering
 
 # Install the NGINX Amplify Agent
-RUN apt-get update \
+RUN echo "deb http://ftp.debian.org/debian stretch-backports main" | tee /etc/apt/sources.list.d/backports.list \
+    && apt-get update \
     && apt-get install -qqy curl python apt-transport-https apt-utils gnupg1 procps \
     && apt-get install -y python-certbot-apache -t stretch-backports \
     && echo 'deb https://packages.amplify.nginx.com/debian/ stretch amplify-agent' > /etc/apt/sources.list.d/nginx-amplify.list \
